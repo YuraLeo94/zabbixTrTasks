@@ -42,7 +42,7 @@ function checkSequenceOfWords(startLetters, endLetters, allLetters, singleWords,
         
         if (Object.keys(singleWords).length > 0) {
             for (const char in singleWords) {
-                if (!startLetters?.hasOwnProperty(char) || !endLetters?.hasOwnProperty(char)) {
+                if (!startLetters?.hasOwnProperty(char) && !endLetters?.hasOwnProperty(char)) {
                     return false;
                 }
             }
@@ -68,7 +68,8 @@ playOnWordsOpenDoor(['acm', 'malform', 'mom'], 'ok');
 playOnWordsOpenDoor(['a', 'acm', 'a', 'malform', 'momma'], 'ok');
 playOnWordsOpenDoor(['acm', 'malform', 'mi', 'i', 'icberg'], 'ok');
 playOnWordsOpenDoor(['acm', 'malform', 'mi', 'i', 'icbergi'], 'ok');
-playOnWordsOpenDoor(['mca', 'alform', 'mi', 'a', 'a', 'a', 'icberg'], 'ok'); 
+playOnWordsOpenDoor(['mca', 'alform', 'mi', 'a', 'a', 'a', 'icberg'], 'ok');
+playOnWordsOpenDoor(['mcm', 'mlform', 'mi', 'a', 'icberga'], 'ok'); 
 
 console.log('-No--')
 playOnWordsOpenDoor(['acm', 'malfori', 'mi', 'i', 'icbergi'], 'no');
