@@ -70,6 +70,7 @@ playOnWordsOpenDoor(['acm', 'malform', 'mi', 'i', 'icberg'], 'ok');
 playOnWordsOpenDoor(['acm', 'malform', 'mi', 'i', 'icbergi'], 'ok');
 playOnWordsOpenDoor(['mca', 'alform', 'mi', 'a', 'a', 'a', 'icberg'], 'ok');
 playOnWordsOpenDoor(['mcm', 'mlform', 'mi', 'a', 'icberga'], 'ok'); 
+playOnWordsOpenDoor(['amcm', 'mlform', 'mi', 'a', 'icberg'], 'ok'); 
 
 console.log('-No--')
 playOnWordsOpenDoor(['acm', 'malfori', 'mi', 'i', 'icbergi'], 'no');
