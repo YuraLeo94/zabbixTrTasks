@@ -58,6 +58,13 @@ function BFS(a, b, target, needPrintPath) {
 
     let steps = 0;
 
+    function addNode(a, b, unvisitedNode) {
+        if (!hashMap.has(a + "," + b)) {
+            queue.push(new Pair(a, b));
+            hashMapPath.set(a + "," + b, unvisitedNode);
+        }
+    }
+
     while (queue.length > 0) {
         const unvisitedNode = queue.shift();
 
@@ -69,55 +76,29 @@ function BFS(a, b, target, needPrintPath) {
             return steps;
         }
 
-        if (!hashMap.has(unvisitedNode.first + "," + b)) {
-            queue.push(new Pair(unvisitedNode.first, b));
-            hashMapPath.set(unvisitedNode.first + "," + b, unvisitedNode);
-        }
-
-        if (!hashMap.has(a + "," + unvisitedNode.second)) {
-            queue.push(new Pair(a, unvisitedNode.second));
-            hashMapPath.set(a + "," + unvisitedNode.second, unvisitedNode);
-        }
+        addNode(unvisitedNode.first, b, unvisitedNode);
+        addNode(a, unvisitedNode.second, unvisitedNode);
 
         let d = b - unvisitedNode.second;
         if (unvisitedNode.first >= d) {
             let r = unvisitedNode.first - d;
-            if (!hashMap.has(r + "," + b)) {
-                queue.push(new Pair(r, b));
-                hashMapPath.set(r + "," + b, unvisitedNode);
-            }
+            addNode(r, b, unvisitedNode);
         } else {
             let tw = unvisitedNode.first + unvisitedNode.second;
-            if (!hashMap.has("0," + tw)) {
-                queue.push(new Pair(0, tw));
-                hashMapPath.set("0," + tw, unvisitedNode);
-            }
+            addNode(0, tw, unvisitedNode);
         }
 
         d = a - unvisitedNode.first;
         if (unvisitedNode.second >= d) {
             let r = unvisitedNode.second - d;
-            if (!hashMap.has(a + "," + r)) {
-                queue.push(new Pair(a, r));
-                hashMapPath.set(a + "," + r, unvisitedNode);
-            }
+            addNode(a, r, unvisitedNode);
         } else {
             let tw = unvisitedNode.first + unvisitedNode.second;
-            if (!hashMap.has(tw + ",0")) {
-                queue.push(new Pair(tw, 0));
-                hashMapPath.set(tw + ",0", unvisitedNode);
-            }
+            addNode(tw, 0, unvisitedNode);
         }
 
-        if (!hashMap.has(unvisitedNode.first + ",0")) {
-            queue.push(new Pair(unvisitedNode.first, 0));
-            hashMapPath.set(unvisitedNode.first + ",0", unvisitedNode);
-        }
-
-        if (!hashMap.has("0," + unvisitedNode.second)) {
-            queue.push(new Pair(0, unvisitedNode.second));
-            hashMapPath.set("0," + unvisitedNode.second, unvisitedNode);
-        }
+        addNode(unvisitedNode.first, 0, unvisitedNode);
+        addNode(0,  unvisitedNode.second, unvisitedNode);
     }
 
     if (!hasSolution)
@@ -127,7 +108,7 @@ function BFS(a, b, target, needPrintPath) {
 
 function pouringWater(a, b, c) {
     console.log(`Value ${a}, ${b}, ${c}`);
-    if (c === a || c === b) {return console.log('Steps 1')}
+    if (c === a || c === b) { return console.log('Steps 1') }
 
     console.log('Steps', BFS(a, b, c));
 }
@@ -136,7 +117,6 @@ pouringWater(4, 3, 2);
 pouringWater(5, 3, 4);
 pouringWater(5, 4, 4);
 pouringWater(3, 5, 4);
-pouringWater(2, 7, 5);
 pouringWater(2, 7, 5);
 pouringWater(2, 3, 4); // no
 pouringWater(2, 8, 5); // no
